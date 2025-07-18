@@ -22,11 +22,24 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Importar rotas com logs para debug
+const authRouter = require('./routes/auth');
+console.log('authRouter:', typeof authRouter);
+
+const vehiclesRouter = require('./routes/vehicles');
+console.log('vehiclesRouter:', typeof vehiclesRouter);
+
+const driversRouter = require('./routes/drivers');
+console.log('driversRouter:', typeof driversRouter);
+
+const maintenanceRouter = require('./routes/maintenance');
+console.log('maintenanceRouter:', typeof maintenanceRouter);
+
 // Rotas
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/vehicles', require('./routes/vehicles'));
-app.use('/api/drivers', require('./routes/drivers'));
-app.use('/api/maintenance', require('./routes/maintenance'));
+app.use('/api/auth', authRouter);
+app.use('/api/vehicles', vehiclesRouter);
+app.use('/api/drivers', driversRouter);
+app.use('/api/maintenance', maintenanceRouter);
 
 // Rota de teste
 app.get('/api', (req, res) => {
